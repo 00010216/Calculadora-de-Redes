@@ -40,5 +40,45 @@ public class MainActivity extends AppCompatActivity {
         text_netpart = findViewById(R.id.text_netpart);
         text_hostpart = findViewById(R.id.text_hostpart);
     }
+
+    void validateIp() {
+        String temp = edit_ip.getText().toString().trim();
+        if (temp.isEmpty())
+            throw new IllegalArgumentException("Campo de IP vacío");
+        else if (!temp.matches(IP_ADDRESS_PATTERN))
+            throw new IllegalArgumentException("Formato de IP no válido");
+        else {
+            mip[0] = Integer.parseInt(temp.split("\\.")[0]);
+            mip[1] = Integer.parseInt(temp.split("\\.")[1]);
+            mip[2] = Integer.parseInt(temp.split("\\.")[2]);
+            mip[3] = Integer.parseInt(temp.split("\\.")[3]);
+        }
+    }
+
+    void getNetMask() {
+        String temp = edit_mask.getText().toString().trim();
+
+        //Antes de calcular la máscara, se hacen las validaciones necesarias
+
+        if (temp.isEmpty())
+            throw new IllegalArgumentException("Campo de máscara vacío");
+        else if (Integer.parseInt(temp) < 1 || Integer.parseInt(temp) > 32)
+            throw new IllegalArgumentException("Valor no permitido para la máscara: " + temp);
+        else {
+            int prefix = 0xffffffff << (32 - Integer.parseInt(temp));
+            mask[0] = prefix >>> 24;
+            mask[1] = prefix >> 16 & 0xff;
+            mask[2] = prefix >> 8 & 0xff;
+            mask[3] = prefix & 0xff;
+
+            //Ahora vamos a calcular la wildcard mask, que es exactamente el reverso, bit por bit, de la máscara
+
+            wildcard[0] = (~mask[0] << 24) >>> 24;
+            wildcard[1] = (~mask[1] << 24) >>> 24;
+            wildcard[2] = (~mask[2] << 24) >>> 24;
+            wildcard[3] = (~mask[3] << 24) >>> 24;
+            text_netmask.setText(mask[0]+" . "+mask[1]+" . "+mask[2]+" . "+mask[3]);
+        }
     }
 }
+
