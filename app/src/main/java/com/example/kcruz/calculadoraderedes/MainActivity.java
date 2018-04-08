@@ -103,6 +103,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //La parte del host se obtiene haciendo un bitwise-AND entre la negación bit por bit de la máscara y la dirección
+    void getHostPart() {
+        host =  (~mask[0] & mip[0]) + "." + (mip[1] & ~mask[1]) + "." + (mip[2] & ~mask[2])
+                + "." + (mip[3] & ~mask[3]);
+        text_hostpart.setText(host);
+    }
+
+    //La parte de la red se obtiene haciendo un bitwise-AND entre la máscara y la dirección de la IP
+    void getNetwork() {
+        network = (mask[0] & mip[0]) + "." + (mip[1] & mask[1]) + "." + (mip[2] & mask[2])
+                + "." + (mip[3] & mask[3]);
+        text_network.setText(network);
+        text_netpart.setText(network);
+    }
+
     //El broadcast se obtiene con un bitwise-OR entre la IP y el reverso de la máscara, que es la wildcard mask y ya calculamos
     void getBroadcast() {
         broadcast = (wildcard[0] | mip[0]) + "." + (mip[1] | wildcard[1]) + "." + (mip[2] | wildcard[2])
