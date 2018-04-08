@@ -2,9 +2,12 @@ package com.example.kcruz.calculadoraderedes;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +43,25 @@ public class MainActivity extends AppCompatActivity {
         text_netpart = findViewById(R.id.text_netpart);
         text_hostpart = findViewById(R.id.text_hostpart);
     }
+
+    View.OnClickListener onClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try {
+                validateIp();
+                getNetMask();
+                getNetwork();
+                getBroadcast();
+                getHostPart();
+                text_hosts.setText(""+(int)(Math.pow(2, 32-Integer.parseInt(edit_mask.getText().toString()))-2));
+            }
+            catch (IllegalArgumentException e) {
+                Toast toast = Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_VERTICAL,0,0);
+                toast.show();
+            }
+        }
+    };
 
     void validateIp() {
         String temp = edit_ip.getText().toString().trim();
@@ -79,6 +101,15 @@ public class MainActivity extends AppCompatActivity {
             wildcard[3] = (~mask[3] << 24) >>> 24;
             text_netmask.setText(mask[0]+" . "+mask[1]+" . "+mask[2]+" . "+mask[3]);
         }
+    }
+
+    //El broadcast se obtiene con un bitwise-OR entre la IP y el reverso de la máscara, que es la wildcard mask y ya calculamos
+    void getBroadcast() {
+        broadcast = (wildcard[0] | mip[0]) + "." + (mip[1] | wildcard[1]) + "." + (mip[2] | wildcard[2])
+                + "." + (mip[3] | wildcard[3]);
+        text_broadcast.setText(broadcast);
+
+        //text_hosts.setText("Wildcard : "+(wildcard[0])+" . "+(wildcard[1])+" . "+(wildcard[2])+" . "+(wildcard[3]));
     }
 }
 
