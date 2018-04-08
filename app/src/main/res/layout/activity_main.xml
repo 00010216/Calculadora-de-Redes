@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="#3f4343"
+    tools:context="com.example.kcruz.calculadoraderedes.MainActivity">
+
+    <EditText
+        android:id="@+id/edit_ip"
+        android:background="@drawable/shape"
+        android:padding="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/text_slash"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        android:digits="0123456789."
+        android:maxLength="15"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:inputType="phone"
+        android:hint="@string/ip_hint" />
+
+    <TextView
+        android:id="@+id/text_slash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/edit_mask"
+        android:layout_alignBaseline="@id/edit_ip"
+        android:textSize="24sp"
+        android:layout_marginTop="8dp"
+        android:textColor="#fff"
+        android:text="/"/>
+
+    <EditText
+        android:id="@+id/edit_mask"
+        android:background="@drawable/shape"
+        android:padding="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentRight="true"
+        android:textAlignment="center"
+        android:inputType="number"
+        android:textColorHint="#fff"
+        android:textColor="#fff"
+        android:maxLength="2"
+        android:hint="@string/mask_hint"
+        />
+
+    <Button
+        android:id="@+id/btn_calcular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edit_ip"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/calcular"/>
+
+    <TextView
+        android:id="@+id/text_netmask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_calcular"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:text="@string/text_netmask"
+        android:textColor="#fff"
+        android:visibility="invisible"/>
+
+    <TextView
+        android:id="@+id/netID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_netmask"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="#fff"
+        android:text="@string/text_network"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_network"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/netID"
+        android:textColor="#fff"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:id="@+id/broadcast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_network"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="#fff"
+        android:text="@string/text_broadcast"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_broadcast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/broadcast"
+        android:layout_marginTop="1dp"
+        android:textColor="#fff"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:id="@+id/cantidadHosts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_broadcast"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="#fff"
+        android:text="@string/cantidad_hosts"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_hosts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cantidadHosts"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="16dp"
+        android:textColor="#fff" />
+
+
+    <TextView
+        android:id="@+id/parteDeRed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/cantidadHosts"
+        android:layout_alignBottom="@+id/cantidadHosts"
+        android:layout_alignEnd="@+id/edit_ip"
+        android:layout_alignRight="@+id/edit_ip"
+        android:layout_below="@id/text_broadcast"
+        android:text="@string/netpart"
+        android:textColor="#fff"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_netpart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:layout_alignBaseline="@+id/text_hosts"
+        android:layout_alignBottom="@+id/text_hosts"
+        android:layout_alignStart="@+id/parteDeRed"
+        android:layout_alignLeft="@+id/parteDeRed" />
+
+    <TextView
+        android:id="@+id/parteDeHost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_hosts"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:textColor="#fff"
+        android:text="@string/hostpart"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/text_hostpart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/parteDeHost"
+        android:textColor="#fff"
+        android:layout_marginTop="1dp"
+        android:layout_marginLeft="16dp" />
+
+</RelativeLayout>
