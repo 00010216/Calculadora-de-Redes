@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Calculadora de Redes</string>
+    <string name="text_netmask">Máscara de red:</string>
+    <string name="text_network">NetID</string>
+    <string name="text_broadcast">Broadcast</string>
+    <string name="cantidad_hosts">Cantidad de hosts</string>
+    <string name="netpart">Parte de red</string>
+    <string name="hostpart">Parte de host</string>
+    <string name="calcular">Calcular</string>
+    <string name="mask_hint">Máscara</string>
+    <string name="ip_hint">Ingrese la dirección IP</string>
 </resources>
