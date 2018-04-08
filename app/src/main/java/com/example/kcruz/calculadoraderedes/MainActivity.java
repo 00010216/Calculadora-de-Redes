@@ -2,12 +2,43 @@ package com.example.kcruz.calculadoraderedes;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    EditText edit_ip, edit_mask;
+    TextView text_netmask, text_network, text_broadcast, text_hosts;
+    TextView text_netpart, text_hostpart;
+    Button btn_calcular;
+    String network, broadcast, host;
+    int mask[] = new int[4];
+    int wildcard[] = new int[4];
+    int mip[] = new int[4];
+
+    private final String IP_ADDRESS_PATTERN =
+            "^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\." +
+                    "(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\." +
+                    "(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\\." +
+                    "(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Se infla el layout
         setContentView(R.layout.activity_main);
+        //Se obtienen referencias a todos los objetos ya creados en el heap
+        edit_ip = findViewById(R.id.edit_ip);
+        edit_mask = findViewById(R.id.edit_mask);
+        btn_calcular = findViewById(R.id.btn_calcular);
+        btn_calcular.setOnClickListener(onClick);
+        text_netmask = findViewById(R.id.text_netmask);
+        text_network = findViewById(R.id.text_network);
+        text_broadcast = findViewById(R.id.text_broadcast);
+        text_hosts = findViewById(R.id.text_hosts);
+        text_netpart = findViewById(R.id.text_netpart);
+        text_hostpart = findViewById(R.id.text_hostpart);
+    }
     }
 }
